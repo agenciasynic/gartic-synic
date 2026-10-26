@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gartic SYNIC</title>
+<style>
+body{background:#0f0f0f;color:white;font-family:Arial;text-align:center;padding:50px}
+button{padding:25px 50px;font-size:22px;background:#5865F2;color:white;border:none;border-radius:15px;cursor:pointer;font-weight:bold}
+button:hover{background:#4752c4}
+</style>
+</head>
+<body>
+<h1>🎨 GARTIC OFICIAL SYNIC</h1>
+<h2>Clique pra criar sua sala automaticamente</h2>
+<button id="play">🚀 CRIAR SALA SYNIC E JOGAR</button>
+<p>Palavras da SYNIC já configuradas!</p>
+<script>
+document.getElementById('play').onclick = async () => {
+  const btn = document.getElementById('play');
+  btn.innerText = "CRIANDO... AGUARDE";
+  btn.disabled = true;
+  const words = ["briefing","cliente","logo","campanha","feed","stories","reels","job","deadline","criatividade","layout","SYNIC","marca","Instagram","TikTok","viral","post","conteudo"];
+  try {
+    const res = await fetch('https://synic-gartic.onrender.com/v1/lobby', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({custom_words: words})
+    });
+    const data = await res.json();
+    window.location.href = 'https://synic-gartic.onrender.com' + data.lobbyId;
+  } catch(e) {
+    window.location.href = 'https://synic-gartic.onrender.com';
+  }
+}
+</script>
+</body>
+</html>
